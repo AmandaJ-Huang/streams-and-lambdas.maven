@@ -5,6 +5,7 @@ import com.zipcodewilmington.streams.anthropoid.PersonFactory;
 import com.zipcodewilmington.streams.tools.RandomUtils;
 import com.zipcodewilmington.streams.tools.StringUtils;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
@@ -57,9 +58,16 @@ public class StreamFilter {
      * @return a list of person object whose name starts with `this.startingCharacter`
      */ //TODO
     public List<Person> toListMultiLine() {
-        return personStream
-                .filter(p -> p.getName().startsWith(startingCharacter))
-                .collect(Collectors.toList());
+        List<Person> list = new ArrayList<Person>();
+
+        personStream.filter(p -> p.getName()
+                        .startsWith(startingCharacter))
+                            .forEach(p ->
+                            {
+                                list.add(p);
+                            });
+
+        return list;
     }
 
 
@@ -86,9 +94,9 @@ public class StreamFilter {
      * @return an array of person object whose name starts with `this.startingCharacter`
      */ //TODO
     public Person[] toArrayMultiLine() {
-        return personStream
-                .filter(p -> p.getName()
-                        .startsWith(startingCharacter)).toArray(Person[]::new);
+        return personStream.filter(p -> p.getName()
+                .startsWith(startingCharacter))
+                .toArray(Person[]::new);
     }
 
 }
