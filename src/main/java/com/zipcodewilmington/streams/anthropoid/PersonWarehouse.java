@@ -78,7 +78,9 @@ public final class PersonWarehouse implements Iterable<Person> {
      * @return a mapping of Person Id to the respective Person name
      */ // TODO
     public Map<Long, String> getIdToNameMap() {
-        return null;
+        Map<Long, String> idName = new HashMap<>();
+        people.forEach(p -> idName.put(p.getPersonalId(), p.getName()));
+        return idName;
     }
 
 
